@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class LaserstrahlItem extends ArrowItem {
 	public LaserstrahlItem () {
-		super(new Properties().group(ItemGroup.COMBAT).defaultMaxDamage(1));
+		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(30));
 	}
 	
 	@Override
