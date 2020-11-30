@@ -13,5 +13,9 @@ public class ModEntityType {
   public static final RegistryObject<EntityType<LaserstrahlEntity>> LASERSTRAHL_ENTITY
   = ENTITY_TYPES.register("laserstrahl_entity", () -> EntityType.Builder.<LaserstrahlEntity>create(LaserstrahlEntity::new, EntityClassification.MISC)
 		  		.size(0.5F, 0.5F)
+		  		.setShouldReceiveVelocityUpdates(true)
+		  		.setTrackingRange(64)
+		  		.setUpdateInterval(1)
+		  		.setCustomClientFactory(LaserstrahlEntity::new)		
 		  		.build(new ResourceLocation(Utils.MOD_ID,"laserstrahl_entity").toString())); 
 }

@@ -14,7 +14,9 @@ public class LaserstrahlItem extends ArrowItem {
 	
 	@Override
 	public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
-		LaserstrahlEntity e = new LaserstrahlEntity(worldIn, shooter);
-		return e;		
+		//LaserstrahlEntity e = new LaserstrahlEntity(worldIn, shooter);
+		//return e;
+		
+		return null;
 	}
 }

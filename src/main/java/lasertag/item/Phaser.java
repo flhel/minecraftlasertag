@@ -4,37 +4,104 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShootableItem;
 import net.minecraft.item.UseAction;
-import net.minecraft.stats.Stats;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
 
+import java.util.Random;
 import java.util.function.Predicate;
 
+import lasertag.client.entity.render.CustomRender;
+import lasertag.entity.LaserstrahlEntity;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 
 public class Phaser extends ShootableItem {
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl_item"), ForgeRegistries.ITEMS);
-
+	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));
 	}
+	
+	//public static final EntityType<LaserstrahlEntity> arrow = ModEntityType.LASERSTRAHL_ENTITY.get();
+	public static final EntityType arrow = null;
 
-	public void shotCustom(ItemStack stack, World worldIn, PlayerEntity playerentity) {
-		System.out.println("shot");
+	@OnlyIn(Dist.CLIENT)
+	public static void init() {
+		System.out.println("hey222" + arrow);
+		RenderingRegistry.registerEntityRenderingHandler(arrow, renderManager -> new CustomRender(renderManager));
+		System.out.println("hey333");
+	}
+
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
+		System.out.println("shot1");
+		if (entityLiving instanceof PlayerEntity) {
+			PlayerEntity playerentity = (PlayerEntity)entityLiving;
+			boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
+			ItemStack itemstack = playerentity.findAmmo(stack);
+
+			if (!world.isRemote && entityLiving instanceof ServerPlayerEntity) {
+				ServerPlayerEntity entity = (ServerPlayerEntity) entityLiving;
+
+				if (!itemstack.isEmpty() || flag) {
+					boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
+					
+					LaserstrahlEntity entityarrow = shoot(world, entity, random, 2f, 0, 5);
+					itemstack.damageItem(1, entity, e -> e.sendBreakAnimation(entity.getActiveHand()));
+					entityarrow.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
+					
+					if (!flag1 && !playerentity.abilities.isCreativeMode) {
+						itemstack.shrink(1);
+						if (itemstack.isEmpty()) {
+							playerentity.inventory.deleteStack(itemstack);
+						}
+					}
+					
+				}
+			}
+		}
+	}
+	
+	public static LaserstrahlEntity shoot(World world, LivingEntity entity, Random random, float power, double damage, int knockback) {
+		System.out.println("shot2");
+		LaserstrahlEntity entityarrow = new LaserstrahlEntity(arrow, entity, world);
+		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power * 2, 0);
+		entityarrow.setSilent(true);
+		entityarrow.setIsCritical(false);
+		entityarrow.setDamage(damage);
+		entityarrow.setKnockbackStrength(knockback);
+		world.addEntity(entityarrow);
+		double x = entity.getPosX();
+		double y = entity.getPosY();
+		double z = entity.getPosZ();
+		world.playSound((PlayerEntity) null, (double) x, (double) y, (double) z,
+				(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.end_portal.spawn")),
+				SoundCategory.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
+
+		return entityarrow;
+	}
+
+/*
+	public void shoot(ItemStack stack, World worldIn, PlayerEntity playerentity) {
+		
 		// flag -> Munitionsverbrauch an/aus
-		boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0; 
-		ItemStack itemstack = playerentity.findAmmo(stack);
+		
 
 		net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, 10, !itemstack.isEmpty() || flag);
 
@@ -70,7 +137,7 @@ public class Phaser extends ShootableItem {
 
 			playerentity.addStat(Stats.ITEM_USED.get(this));
 		}
-	}	         
+	}	*/         
 
 	/**
 	 * Gets the velocity of the arrow entity 
@@ -84,7 +151,15 @@ public class Phaser extends ShootableItem {
 	 */
 
 	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.NONE;
+		return UseAction.BOW;
+	}
+	
+	/*
+	 * UseDuration
+	 */
+	@Override
+	public int getUseDuration(ItemStack itemstack) {
+		return 5000;
 	}
 
 	/**
@@ -105,7 +180,7 @@ public class Phaser extends ShootableItem {
 		} else {
 			playerIn.setActiveHand(handIn);
 
-			shotCustom(itemstack, worldIn, playerIn);
+			//shoot(itemstack, worldIn, playerIn);
 			return ActionResult.resultConsume(itemstack);
 		}
 	}
