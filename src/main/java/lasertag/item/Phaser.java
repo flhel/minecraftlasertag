@@ -15,12 +15,15 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Random;
 import java.util.function.Predicate;
 
 import lasertag.client.entity.render.CustomRender;
 import lasertag.entity.LaserstrahlEntity;
+import lasertag.entity.ModEntityType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -33,20 +36,19 @@ import net.minecraft.item.Item;
 public class Phaser extends ShootableItem {
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl_item"), ForgeRegistries.ITEMS);
 	
+	public static EntityType<LaserstrahlEntity> arrow = null;
+	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
 	}
 	
-	//public static final EntityType<LaserstrahlEntity> arrow = ModEntityType.LASERSTRAHL_ENTITY.get();
-	public static final EntityType arrow = null;
-
-	@OnlyIn(Dist.CLIENT)
-	public static void init() {
+	private void commonSetup(FMLCommonSetupEvent evt) {
+		arrow = ModEntityType.LASERSTRAHL_ENTITY.get(); 
 		System.out.println("hey222" + arrow);
 		RenderingRegistry.registerEntityRenderingHandler(arrow, renderManager -> new CustomRender(renderManager));
 		System.out.println("hey333");
 	}
-
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
