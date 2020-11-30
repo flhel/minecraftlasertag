@@ -10,14 +10,12 @@ public class MyLaserstrahlRenderer extends ArrowRenderer<LaserstrahlEntity> {
 	
 	public MyLaserstrahlRenderer(EntityRendererManager renderManagerIn) {
 		super(renderManagerIn);
-		System.out.println("hey1");
 	}
 	
 	/**
 	 * Returns the location of an entity's texture.
 	 */
 	public ResourceLocation getEntityTexture(LaserstrahlEntity entity) {
-		System.out.println("hey " + RES_LASERSTRAHL_ENTITY);
 		return RES_LASERSTRAHL_ENTITY;
 	}
 }

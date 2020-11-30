@@ -2,7 +2,6 @@ package lasertag.item;
 
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.ShootableItem;
 import net.minecraft.item.UseAction;
 import net.minecraft.stats.Stats;
@@ -22,7 +21,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.ArrowItem;
 import net.minecraft.item.Item;
 
 public class Phaser extends ShootableItem {
@@ -33,6 +31,7 @@ public class Phaser extends ShootableItem {
 	}
 
 	public void shotCustom(ItemStack stack, World worldIn, PlayerEntity playerentity) {
+		System.out.println("shot");
 		// flag -> Munitionsverbrauch an/aus
 		boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0; 
 		ItemStack itemstack = playerentity.findAmmo(stack);
@@ -47,8 +46,8 @@ public class Phaser extends ShootableItem {
 			float f = getArrowVelocity();
 			boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
 			if (!worldIn.isRemote) {
-				//LaserstrahlItem arrowitem = (LaserstrahlItem)(itemstack.getItem() instanceof LaserstrahlItem ? itemstack.getItem() : LASERSTRAHL_ITEM.get());
-				ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
+				LaserstrahlItem arrowitem = (LaserstrahlItem)(itemstack.getItem() instanceof LaserstrahlItem ? itemstack.getItem() : LASERSTRAHL_ITEM.get());
+				//ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
 				AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
 				abstractarrowentity.func_234612_a_(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
 
@@ -57,8 +56,8 @@ public class Phaser extends ShootableItem {
 				abstractarrowentity.setDamage(abstractarrowentity.getDamage());
 				abstractarrowentity.setKnockbackStrength(1);
 				abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
-
-				worldIn.addEntity(abstractarrowentity);
+				abstractarrowentity.shoot(playerentity.getLookVec().x, playerentity.getLookVec().y, playerentity.getLookVec().z, 5, 0);
+				worldIn.addEntity(abstractarrowentity); //hier nach bug    EntityRendererManager
 			}
 			//Sound hier
 			worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
@@ -104,12 +103,12 @@ public class Phaser extends ShootableItem {
 		if (!playerIn.abilities.isCreativeMode && !flag) {
 			return ActionResult.resultFail(itemstack);
 		} else {
-			shotCustom(itemstack, worldIn, playerIn);
 			playerIn.setActiveHand(handIn);
+
+			shotCustom(itemstack, worldIn, playerIn);
 			return ActionResult.resultConsume(itemstack);
 		}
 	}
-
 	/**
 	 * Get the predicate to match ammunition when searching the player's inventory, not their main/offhand
 	 * Find them in src\main\resources\data\lasertag\tags\items\laserstrahl_items:json
@@ -126,4 +125,3 @@ public class Phaser extends ShootableItem {
 	      return 15;
 	}
 }
-
