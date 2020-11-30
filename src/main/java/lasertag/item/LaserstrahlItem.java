@@ -1,6 +1,7 @@
 package lasertag.item;
 import lasertag.entity.LaserstrahlEntity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -12,12 +13,8 @@ public class LaserstrahlItem extends ArrowItem {
 	}
 	
 	@Override
-	public LaserstrahlEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
-		return new LaserstrahlEntity(worldIn, shooter);
-	}
-
-	@Override
-	public boolean isInfinite(ItemStack stack, ItemStack bow, net.minecraft.entity.player.PlayerEntity player) {
-		return false;
+	public AbstractArrowEntity createArrow(World worldIn, ItemStack stack, LivingEntity shooter) {
+		LaserstrahlEntity e = new LaserstrahlEntity(worldIn, shooter);
+		return e;		
 	}
 }
