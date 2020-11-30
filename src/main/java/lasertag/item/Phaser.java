@@ -10,20 +10,13 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import java.util.Random;
 import java.util.function.Predicate;
 
-import lasertag.client.entity.render.CustomRender;
 import lasertag.entity.LaserstrahlEntity;
-import lasertag.entity.ModEntityType;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -35,19 +28,10 @@ import net.minecraft.item.Item;
 
 public class Phaser extends ShootableItem {
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl_item"), ForgeRegistries.ITEMS);
-	
 	public static EntityType<LaserstrahlEntity> arrow = null;
 	
 	public Phaser() {
-		super(new Properties().group(ItemGroup.COMBAT));
-		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::commonSetup);
-	}
-	
-	private void commonSetup(FMLCommonSetupEvent evt) {
-		arrow = ModEntityType.LASERSTRAHL_ENTITY.get(); 
-		System.out.println("hey222" + arrow);
-		RenderingRegistry.registerEntityRenderingHandler(arrow, renderManager -> new CustomRender(renderManager));
-		System.out.println("hey333");
+		super(new Properties().group(ItemGroup.COMBAT));	
 	}
 	
 	@Override
@@ -98,48 +82,6 @@ public class Phaser extends ShootableItem {
 
 		return entityarrow;
 	}
-
-/*
-	public void shoot(ItemStack stack, World worldIn, PlayerEntity playerentity) {
-		
-		// flag -> Munitionsverbrauch an/aus
-		
-
-		net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, playerentity, 10, !itemstack.isEmpty() || flag);
-
-		if (!itemstack.isEmpty() || flag) {
-			if (itemstack.isEmpty()) {
-				itemstack = new ItemStack(LASERSTRAHL_ITEM.get());
-			}
-
-			float f = getArrowVelocity();
-			boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-			if (!worldIn.isRemote) {
-				LaserstrahlItem arrowitem = (LaserstrahlItem)(itemstack.getItem() instanceof LaserstrahlItem ? itemstack.getItem() : LASERSTRAHL_ITEM.get());
-				//ArrowItem arrowitem = (ArrowItem)(itemstack.getItem() instanceof ArrowItem ? itemstack.getItem() : Items.ARROW);
-				AbstractArrowEntity abstractarrowentity = arrowitem.createArrow(worldIn, itemstack, playerentity);
-				abstractarrowentity.func_234612_a_(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, f * 3.0F, 1.0F);
-
-				abstractarrowentity.setIsCritical(false);
-
-				abstractarrowentity.setDamage(abstractarrowentity.getDamage());
-				abstractarrowentity.setKnockbackStrength(1);
-				abstractarrowentity.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
-				abstractarrowentity.shoot(playerentity.getLookVec().x, playerentity.getLookVec().y, playerentity.getLookVec().z, 5, 0);
-				worldIn.addEntity(abstractarrowentity); //hier nach bug    EntityRendererManager
-			}
-			//Sound hier
-			worldIn.playSound((PlayerEntity)null, playerentity.getPosX(), playerentity.getPosY(), playerentity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.PLAYERS, 1.0F, 1.0F / (random.nextFloat() * 0.4F + 1.2F) + f * 0.5F);
-			if (!flag1 && !playerentity.abilities.isCreativeMode) {
-				itemstack.shrink(1);
-				if (itemstack.isEmpty()) {
-					playerentity.inventory.deleteStack(itemstack);
-				}
-			}
-
-			playerentity.addStat(Stats.ITEM_USED.get(this));
-		}
-	}	*/         
 
 	/**
 	 * Gets the velocity of the arrow entity 

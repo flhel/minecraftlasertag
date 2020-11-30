@@ -21,21 +21,9 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
-public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAsItem {
-	
+public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAsItem {	
 	
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl"), ForgeRegistries.ITEMS);
-	
-	/*
-	public LaserstrahlEntity(World worldIn, double x, double y, double z) {
-		super(ModEntityType.LASERSTRAHL_ENTITY.get(), x, y, z, worldIn);
-	}
-
-	public LaserstrahlEntity(World worldIn, LivingEntity shooter) {
-		super(ModEntityType.LASERSTRAHL_ENTITY.get(), shooter, worldIn);
-	}
-	
-	*/
 	
 	public LaserstrahlEntity(EntityType<? extends LaserstrahlEntity> type, World worldIn) {
 		super(type, worldIn);
