@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.function.Predicate;
 
 import lasertag.entity.LaserstrahlEntity;
+import lasertag.sounds.ModSounds;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -36,7 +37,6 @@ public class Phaser extends ShootableItem {
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
-		System.out.println("shot1");
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity)entityLiving;
 			boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
@@ -48,7 +48,8 @@ public class Phaser extends ShootableItem {
 				if (!itemstack.isEmpty() || flag) {
 					boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
 					
-					LaserstrahlEntity entityarrow = shoot(world, entity, random, 2f, 0, 5);
+					System.out.println("" + timeLeft);
+					LaserstrahlEntity entityarrow = shoot(world, entity, random, 2f, 5.1 - (timeLeft * 0.001), 0);
 					itemstack.damageItem(1, entity, e -> e.sendBreakAnimation(entity.getActiveHand()));
 					entityarrow.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
 					
@@ -65,20 +66,20 @@ public class Phaser extends ShootableItem {
 	}
 	
 	public static LaserstrahlEntity shoot(World world, LivingEntity entity, Random random, float power, double damage, int knockback) {
-		System.out.println("shot2");
 		LaserstrahlEntity entityarrow = new LaserstrahlEntity(arrow, entity, world);
 		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power * 2, 0);
 		entityarrow.setSilent(true);
 		entityarrow.setIsCritical(false);
 		entityarrow.setDamage(damage);
 		entityarrow.setKnockbackStrength(knockback);
+		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, getArrowVelocity() , 1.0F);
 		world.addEntity(entityarrow);
 		double x = entity.getPosX();
 		double y = entity.getPosY();
 		double z = entity.getPosZ();
-		world.playSound((PlayerEntity) null, (double) x, (double) y, (double) z,
-				(net.minecraft.util.SoundEvent) ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation("block.end_portal.spawn")),
-				SoundCategory.PLAYERS, 1, 1f / (random.nextFloat() * 0.5f + 1) + (power / 2));
+		
+		world.playSound((PlayerEntity) entity, (double) x, (double) y, (double) z, ModSounds.PHASER_SOUND.get(),
+				SoundCategory.NEUTRAL, 1.0f, 1.0f); //1f / (random.nextFloat() * 0.5f + 1) + (power / 2)
 
 		return entityarrow;
 	}
@@ -87,7 +88,7 @@ public class Phaser extends ShootableItem {
 	 * Gets the velocity of the arrow entity 
 	 */
 	public static float getArrowVelocity() {
-		return 20.0f;
+		return 5.0f;
 	}
 
 	/**
@@ -112,7 +113,6 @@ public class Phaser extends ShootableItem {
 	 */
 
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
-
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 

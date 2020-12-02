@@ -29,7 +29,6 @@ public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
 		matrixStackIn.push();
 		matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90));
 		matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(90 + MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch)));
-		//EntityModel model = new Modelshoot();
 		EntityModel<Entity> model = new Modelshoot();
 		model.render(matrixStackIn, vb, packedLightIn, OverlayTexture.NO_OVERLAY, 1, 1, 1, 0.0625f);
 		matrixStackIn.pop();

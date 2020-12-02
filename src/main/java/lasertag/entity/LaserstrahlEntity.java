@@ -66,7 +66,6 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 	
 	@Override
 	public void tick() {
-		System.out.println("lflag1");
 		super.tick();
 		if (this.inGround) {
 			this.remove();

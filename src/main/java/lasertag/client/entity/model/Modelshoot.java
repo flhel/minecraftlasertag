@@ -12,9 +12,11 @@ public class Modelshoot extends EntityModel<Entity> {
 	public Modelshoot() {
 		textureWidth = 16;
 		textureHeight = 16;
+		
 		bb_main = new ModelRenderer(this);
 		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
-		bb_main.setTextureOffset(0, 0).addBox(-39.5F, -10.0F, -7.5F, 40.0F, 10.0F, 10.0F, 0.0F, false);
+		//0,0,rechts/links,0.0...
+		bb_main.setTextureOffset(0, 0).addBox(0.0F, -6.0F, 2.5F, 1.0F, 6.0F, 1.0F, 0.0F, false);
 	}
 
 	@Override
