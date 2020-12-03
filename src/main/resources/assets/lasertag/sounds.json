@@ -1,0 +1,10 @@
+{
+    "phaser_sound": {
+        "sounds": [
+            {
+                "name": "lasertag:item/phaser_sound",
+                "stream": true
+            }
+        ]
+    }
+}
