@@ -71,8 +71,8 @@ public class Phaser extends ShootableItem {
 		entityarrow.setIsCritical(false);
 		entityarrow.setDamage(damage);
 		entityarrow.setKnockbackStrength(knockback);
-		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 0); //1.0F
-		entityarrow.arrowShake = 5; //geht nicht ? ka vlt shake pro tick 
+		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 0); 
+		entityarrow.arrowShake = 0; //geht nicht ? ka vlt shake pro tick 
 		entityarrow.setNoGravity(true);
 		world.addEntity(entityarrow);
 		double x = entity.getPosX();
