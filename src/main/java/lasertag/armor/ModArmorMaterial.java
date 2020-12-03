@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public enum ModArmorMaterial implements IArmorMaterial {
 	
-	VESTONE ("teamonevest", 33, new int[] {0, 0, 0, 0},  0,
+	VESTONE ("lasertag:lasertagvestone", 33, new int[] {0, 0, 0, 0},  0,
 			SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> {return Ingredient.fromItems(Items.IRON_INGOT);}, 0.0F);
 	
 	private static final int[] MAX_DAMAGE_ARRAY = new int[] {0, 0, 0, 0};
