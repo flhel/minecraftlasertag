@@ -1,8 +1,9 @@
 {
     "phaser_sound": {
+    	"category": "master",
         "sounds": [
             {
-                "name": "lasertag:item/phaser_sound",
+                "name": "lasertag:phaser_sound",
                 "stream": true
             }
         ]

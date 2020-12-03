@@ -4,7 +4,6 @@ import lasertag.item.Phaser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +12,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -73,6 +73,11 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 		if (this.inGround || this.inWater) {
 			this.remove();
 		}
+	}
+	
+	protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
+	      super.onEntityHit(p_213868_1_);
+	      this.remove();
 	}
 }
 

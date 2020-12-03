@@ -9,6 +9,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -16,8 +17,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.Random;
 import java.util.function.Predicate;
 
+import lasertag.Utils;
 import lasertag.entity.LaserstrahlEntity;
-import lasertag.sounds.ModSounds;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -30,6 +31,7 @@ import net.minecraft.item.Item;
 public class Phaser extends ShootableItem {
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl_item"), ForgeRegistries.ITEMS);
 	public static EntityType<LaserstrahlEntity> arrow = null;
+	public static SoundEvent sound = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "phaser_sound"));
 	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));	
@@ -66,21 +68,18 @@ public class Phaser extends ShootableItem {
 	
 	public static LaserstrahlEntity shoot(World world, LivingEntity entity, Random random, float power, double damage, int knockback) {
 		LaserstrahlEntity entityarrow = new LaserstrahlEntity(arrow, entity, world);
-		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 0);	   
+		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 1.0f);	   
 		entityarrow.setSilent(true);
 		entityarrow.setIsCritical(false);
 		entityarrow.setDamage(damage);
 		entityarrow.setKnockbackStrength(knockback);
-		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 0); 
-		entityarrow.arrowShake = 0; //geht nicht ? ka vlt shake pro tick 
+		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 1.0f); 
 		entityarrow.setNoGravity(true);
+		entityarrow.arrowShake = 0; //geht nicht?
 		world.addEntity(entityarrow);
-		double x = entity.getPosX();
-		double y = entity.getPosY();
-		double z = entity.getPosZ();
+
 		
-		world.playSound((PlayerEntity) entity, (double) x, (double) y, (double) z, ModSounds.PHASER_SOUND.get(),
-				SoundCategory.NEUTRAL, 1.0f, 1.0f); //1f / (random.nextFloat() * 0.5f + 1) + (power / 2)
+		world.playSound((PlayerEntity) entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), sound, SoundCategory.MASTER, 1.0f, 1.0f);
 
 		return entityarrow;
 	}
@@ -89,7 +88,7 @@ public class Phaser extends ShootableItem {
 	 * Gets the velocity of the arrow entity 
 	 */
 	public static float getArrowVelocity() {
-		return 6.0f;
+		return 3.0f;
 	}
 
 	/**

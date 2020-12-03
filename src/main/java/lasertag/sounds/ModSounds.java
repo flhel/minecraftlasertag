@@ -9,5 +9,5 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModSounds {
 	public static final DeferredRegister<SoundEvent> SOUNDS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, Utils.MOD_ID);
-	public static final RegistryObject<SoundEvent> PHASER_SOUND = SOUNDS.register("item.phaser_sound", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "item.phaser_sound.ogg")));
+	public static final RegistryObject<SoundEvent> PHASER_SOUND = SOUNDS.register("phaser_sound", () -> new SoundEvent(new ResourceLocation(Utils.MOD_ID, "phaser_sound")));
 }
