@@ -4,6 +4,7 @@ import lasertag.item.Phaser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -51,6 +52,8 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 		return SoundEvents.BLOCK_ANVIL_HIT;
 	}
 
+	
+	//KA was das soll kann eig null sein
 	@Override
 	@OnlyIn(Dist.CLIENT)
 	public ItemStack getItem() {
@@ -67,9 +70,9 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 	@Override
 	public void tick() {
 		super.tick();
-		if (this.inGround) {
+		if (this.inGround || this.inWater) {
 			this.remove();
 		}
-	}	
+	}
 }
 
