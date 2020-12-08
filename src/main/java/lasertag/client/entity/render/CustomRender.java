@@ -3,6 +3,7 @@ package lasertag.client.entity.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 
+import lasertag.Utils;
 import lasertag.client.entity.model.Modelshoot;
 import lasertag.entity.LaserstrahlEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
@@ -17,7 +18,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
 
 public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
-	private static final ResourceLocation texture = new ResourceLocation("lasertag:textures/entity/laserstrahl_entity.png");
+	private static final ResourceLocation texture = new ResourceLocation(Utils.MOD_ID, "textures/entity/laserstrahl_entity.png");
 	public CustomRender(EntityRendererManager renderManager) {
 		super(renderManager);
 	}

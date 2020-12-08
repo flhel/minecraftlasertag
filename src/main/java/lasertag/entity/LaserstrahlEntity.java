@@ -1,5 +1,6 @@
 package lasertag.entity;
 
+import lasertag.Utils;
 import lasertag.item.Phaser;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IRendersAsItem;
@@ -24,7 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 @OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAsItem {	
 	
-	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation("lasertag:laserstrahl"), ForgeRegistries.ITEMS);
+	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID,"laserstrahl"), ForgeRegistries.ITEMS);
 	
 	public LaserstrahlEntity(EntityType<? extends LaserstrahlEntity> type, World worldIn) {
 		super(type, worldIn);
