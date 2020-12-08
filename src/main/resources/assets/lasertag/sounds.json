@@ -1,6 +1,6 @@
 {
     "phaser_sound": {
-    	"category": "master",
+    	"category": "player",
         "sounds": [
             {
                 "name": "lasertag:phaser_sound",

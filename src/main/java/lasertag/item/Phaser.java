@@ -9,7 +9,6 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -19,6 +18,7 @@ import java.util.function.Predicate;
 
 import lasertag.Utils;
 import lasertag.entity.LaserstrahlEntity;
+import lasertag.sounds.ModSounds;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -31,7 +31,6 @@ import net.minecraft.item.Item;
 public class Phaser extends ShootableItem {
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID, "laserstrahl_item"), ForgeRegistries.ITEMS);
 	public static EntityType<LaserstrahlEntity> arrow = null;
-	public static final SoundEvent sound = new SoundEvent(new ResourceLocation(Utils.MOD_ID, "sounds/phaser_sound.ogg"));
 	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));	
@@ -78,11 +77,7 @@ public class Phaser extends ShootableItem {
 		entityarrow.setNoGravity(true);
 		entityarrow.arrowShake = 0; //geht nicht?
 		world.addEntity(entityarrow);
-
-		System.out.println("hey1 " + sound.getName());
-		world.playSound((PlayerEntity) entity, entity.getPosX(), entity.getPosY(), entity.getPosZ(), sound, SoundCategory.MASTER, 1.0f, 1.0f);
-		//world.playSound((PlayerEntity) null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.MASTER, 1.0f, 1.0f);
-		
+		world.playSound((PlayerEntity) null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
 		return entityarrow;
 	}
 
