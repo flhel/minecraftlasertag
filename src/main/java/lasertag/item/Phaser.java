@@ -35,6 +35,7 @@ public class Phaser extends ShootableItem {
 	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));	
+		System.out.println("err1");
 	}
 	
 	@Override

@@ -80,10 +80,7 @@ public enum ModArmorMaterial2 implements IArmorMaterial {
 	}
 
 
-	public float func_230304_f_() {
-		// TODO Auto-generated method stub
-		return this.knockbackResistence;
-	}
+
 
 	@Override
 	public float getKnockbackResistance() {
