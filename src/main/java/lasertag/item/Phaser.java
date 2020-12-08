@@ -75,7 +75,7 @@ public class Phaser extends ShootableItem {
 		entityarrow.setKnockbackStrength(knockback);
 		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 1.0f); 
 		entityarrow.setNoGravity(true);
-		entityarrow.arrowShake = 0; //geht nicht?
+		entityarrow.arrowShake = 0;
 		world.addEntity(entityarrow);
 		world.playSound((PlayerEntity) null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
 		return entityarrow;
