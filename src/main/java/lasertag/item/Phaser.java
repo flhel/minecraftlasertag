@@ -34,7 +34,6 @@ public class Phaser extends ShootableItem {
 	
 	public Phaser() {
 		super(new Properties().group(ItemGroup.COMBAT));	
-		System.out.println("err1");
 	}
 	
 	@Override
@@ -91,7 +90,7 @@ public class Phaser extends ShootableItem {
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
-
+	@Override
 	public UseAction getUseAction(ItemStack stack) {
 		return UseAction.BOW;
 	}
