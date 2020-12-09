@@ -22,7 +22,7 @@ import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
+//@OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
 public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAsItem {	
 	
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID,"laserstrahl"), ForgeRegistries.ITEMS);
