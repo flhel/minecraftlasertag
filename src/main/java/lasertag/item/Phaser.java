@@ -43,10 +43,7 @@ public class Phaser extends ShootableItem {
 			boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 			ItemStack itemstack = playerentity.findAmmo(stack);
 
-			System.out.println("" + world.isRemote);
-			
 			if (!world.isRemote && entityLiving instanceof ServerPlayerEntity) {
-				System.out.println("hey1");
 				ServerPlayerEntity entity = (ServerPlayerEntity) entityLiving;
 
 				if (!itemstack.isEmpty() || flag) {
