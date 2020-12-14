@@ -18,8 +18,13 @@ public class Main {
         ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModEntityType.ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::clientSetup);      
-    }
+    }	
 	
+	/*
+	private void commonSetup(FMLCommonSetupEvent evt) {
+			
+	}
+	*/
 	
 	private void clientSetup(FMLClientSetupEvent evt) {
 		Phaser.arrow = ModEntityType.LASERSTRAHL_ENTITY.get(); 
@@ -27,7 +32,7 @@ public class Main {
 	}
 	
 	/*
-	private void commonSetup(FMLCommonSetupEvent evt) {
+	private void serverSetup(FMLServerSetupEvent evt) {
 			
 	}
 	*/

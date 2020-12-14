@@ -80,11 +80,5 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 	      super.onEntityHit(p_213868_1_);
 	      this.remove();
 	}
-	
-	/*
-	public float getBrightness() {
-	      return 15.0F;
-	}
-	*/
 }
 
