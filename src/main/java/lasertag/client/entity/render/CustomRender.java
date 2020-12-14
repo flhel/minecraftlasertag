@@ -29,7 +29,7 @@ public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
 	@Override
 	public void render(LaserstrahlEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
 			int packedLightIn) {
-		packedLightIn = 15728800; //Laser heller Rendern
+		packedLightIn = 15728800; //Laser heller rendern
 		
 		IVertexBuilder vb = bufferIn.getBuffer(RenderType.getEntityCutout(this.getEntityTexture(entityIn)));
 		matrixStackIn.push();
