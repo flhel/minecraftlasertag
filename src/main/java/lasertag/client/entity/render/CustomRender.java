@@ -16,7 +16,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.vector.Vector3f;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
 	private static final ResourceLocation texture = new ResourceLocation(Utils.MOD_ID, "textures/entity/laserstrahl_entity.png");
 	public CustomRender(EntityRendererManager renderManager) {
