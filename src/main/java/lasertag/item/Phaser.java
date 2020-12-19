@@ -58,8 +58,7 @@ public class Phaser extends ShootableItem {
 						if (itemstack.isEmpty()) {
 							playerentity.inventory.deleteStack(itemstack);
 						}
-					}
-					
+					}					
 				}
 			}
 		}
