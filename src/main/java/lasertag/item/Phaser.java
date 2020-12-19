@@ -13,7 +13,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.Random;
 import java.util.function.Predicate;
 
 import lasertag.Utils;
@@ -40,20 +39,20 @@ public class Phaser extends ShootableItem {
 	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity)entityLiving;
-			boolean flag = playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 			ItemStack itemstack = playerentity.findAmmo(stack);
-
-			if (!world.isRemote && entityLiving instanceof ServerPlayerEntity) {
+			
+			if (entityLiving instanceof ServerPlayerEntity) {
 				ServerPlayerEntity entity = (ServerPlayerEntity) entityLiving;
 
-				if (!itemstack.isEmpty() || flag) {
-					boolean flag1 = playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity));
-
-					LaserstrahlEntity entityarrow = shoot(world, entity, random, getArrowVelocity(), calcDmg(timeLeft), 0);
-					itemstack.damageItem(1, entity, e -> e.sendBreakAnimation(entity.getActiveHand()));
-					entityarrow.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
+				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
+					if (!world.isRemote) {
+						shoot(world, entity, getArrowVelocity(), calcDmg(timeLeft), 0);
+					}
 					
-					if (!flag1 && !playerentity.abilities.isCreativeMode) {
+					world.playSound((PlayerEntity) null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(), ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
+					itemstack.damageItem(1, entity, e -> e.sendBreakAnimation(entity.getActiveHand()));
+					
+					if (!(playerentity.abilities.isCreativeMode || (itemstack.getItem() instanceof LaserstrahlItem && ((LaserstrahlItem)itemstack.getItem()).isInfinite(itemstack, stack, playerentity)))) {
 						itemstack.shrink(1);
 						if (itemstack.isEmpty()) {
 							playerentity.inventory.deleteStack(itemstack);
@@ -64,9 +63,9 @@ public class Phaser extends ShootableItem {
 		}
 	}
 	
-	public static LaserstrahlEntity shoot(World world, LivingEntity entity, Random random, float power, double damage, int knockback) {
+	public static void shoot(World world, LivingEntity entity, float power, double damage, int knockback) {
 		LaserstrahlEntity entityarrow = new LaserstrahlEntity(arrow, entity, world);
-		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 1.0f);	   
+		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 1.0f);
 		entityarrow.setSilent(true);
 		entityarrow.setIsCritical(false);
 		entityarrow.setDamage(damage);
@@ -74,9 +73,8 @@ public class Phaser extends ShootableItem {
 		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 1.0f); 
 		entityarrow.setNoGravity(true);
 		entityarrow.arrowShake = 0;
+		entityarrow.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
 		world.addEntity(entityarrow);
-		world.playSound((PlayerEntity) null, entity.getPosX(), entity.getPosY(), entity.getPosZ(), ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
-		return entityarrow;
 	}
 
 	/**

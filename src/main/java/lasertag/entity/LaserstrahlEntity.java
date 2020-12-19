@@ -3,27 +3,23 @@ package lasertag.entity;
 import lasertag.Utils;
 import lasertag.item.Phaser;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.IRendersAsItem;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.network.IPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.network.FMLPlayMessages;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.registries.ForgeRegistries;
 
-@OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
-public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAsItem {	
+//@OnlyIn(value = Dist.CLIENT, _interface = IRendersAsItem.class)
+public class LaserstrahlEntity extends AbstractArrowEntity {	
 	
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID,"laserstrahl"), ForgeRegistries.ITEMS);
 	
@@ -55,11 +51,11 @@ public class LaserstrahlEntity extends AbstractArrowEntity implements IRendersAs
 
 	
 	//KA was das soll kann eig null sein
-	@Override
+	//@Override
 	//@OnlyIn(Dist.CLIENT)
-	public ItemStack getItem() {
-		return new ItemStack(Items.END_CRYSTAL, (int) (1));
-	}
+	//public ItemStack getItem() {
+	//	return new ItemStack(Items.END_CRYSTAL, (int) (1));
+	//}
 
 	
 	@Override
