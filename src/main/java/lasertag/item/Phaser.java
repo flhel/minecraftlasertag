@@ -36,6 +36,11 @@ public class Phaser extends ShootableItem {
 	}
 	
 	@Override
+	public void onUse(World world, LivingEntity entityLiving, ItemStack stack, int count) {
+		//automatic fire?
+	}
+	
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
 			PlayerEntity playerentity = (PlayerEntity)entityLiving;
@@ -99,19 +104,18 @@ public class Phaser extends ShootableItem {
 	public int getUseDuration(ItemStack itemstack) {
 		return 50;
 	}
-	
-	//Schadenskalkulation
-	private double calcDmg(int timeLeft) {
+
+	public double calcDmg(int timeLeft) {
 		double dmg = (50 - timeLeft) * 0.1 ; // timeLeft abhängig von getUseDuration
 		if (dmg < 1) { 
 			dmg = 1;
 		}
-		if (dmg > 3) { 
-			dmg = 3;
+		if (dmg > 4) { 
+			dmg = 4;
 		}
 		return dmg;
 	}
-
+	
 	/**
 	 * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
 	 * {@link #onItemUse}.
