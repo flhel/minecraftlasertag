@@ -4,6 +4,6 @@ import net.minecraft.item.ItemGroup;
 
 public class LaserstrahlItem extends ArrowItem {
 	public LaserstrahlItem () {
-		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(30));
+		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(64));
 	}
 }
