@@ -8,7 +8,6 @@ import net.minecraft.util.SoundEvents;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraft.item.Items;
-
 import java.util.function.Supplier;
 
 public enum ModArmorMaterial2 implements IArmorMaterial {

@@ -106,12 +106,12 @@ public class Phaser extends ShootableItem {
 	}
 
 	public double calcDmg(int timeLeft) {
-		double dmg = (50 - timeLeft) * 0.1 ; // timeLeft abhängig von getUseDuration
-		if (dmg < 1) { 
-			dmg = 1;
+		double dmg = 2 + ((54 - timeLeft) * 0.1) ; // timeLeft abhängig von getUseDuration
+		if (dmg < 2) { 
+			dmg = 2;
 		}
-		if (dmg > 4) { 
-			dmg = 4;
+		if (dmg > 6) { 
+			dmg = 6;
 		}
 		return dmg;
 	}
