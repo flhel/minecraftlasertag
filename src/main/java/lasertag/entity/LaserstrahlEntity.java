@@ -2,6 +2,7 @@ package lasertag.entity;
 
 import lasertag.Utils;
 import lasertag.item.Phaser;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -72,9 +73,21 @@ public class LaserstrahlEntity extends AbstractArrowEntity {
 		}
 	}
 	
+	@Override
 	protected void onEntityHit(EntityRayTraceResult p_213868_1_) {
-	      super.onEntityHit(p_213868_1_);
-	      this.remove();
+		super.onEntityHit(p_213868_1_);
+		this.remove();
+		Entity entity = p_213868_1_.getEntity();
+		if (entity instanceof LivingEntity) {
+			LivingEntity livingentity = (LivingEntity)entity;
+			if (!this.world.isRemote && this.getPierceLevel() <= 0) {
+				/* 
+				 * Will get increased bei +1 by default because Lasers are only modded Arrows
+				 * Setting the count -1 will fix the bug where Arrows appear when hitting Enemys
+				 */
+				livingentity.setArrowCountInEntity(livingentity.getArrowCountInEntity() - 1);
+			}
+		}
 	}
 }
 

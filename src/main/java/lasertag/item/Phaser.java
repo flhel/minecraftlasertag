@@ -32,7 +32,7 @@ public class Phaser extends ShootableItem {
 	public static EntityType<LaserstrahlEntity> arrow = null;
 	
 	public Phaser() {
-		super(new Properties().group(ItemGroup.COMBAT));	
+		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(1));	
 	}
 	
 	@Override
@@ -105,13 +105,15 @@ public class Phaser extends ShootableItem {
 		return 50;
 	}
 
+	//real schaden x 1,5
 	public double calcDmg(int timeLeft) {
-		double dmg = 2 + ((54 - timeLeft) * 0.1) ; // timeLeft abhängig von getUseDuration
-		if (dmg < 2) { 
-			dmg = 2;
+		double dmg = (65 - timeLeft) * 0.1; // timeLeft abhängig von getUseDuration
+		System.out.println(dmg);
+		if (dmg < 1.5) { 
+			dmg = 1.5;
 		}
-		if (dmg > 6) { 
-			dmg = 6;
+		if (dmg > 4.5) { 
+			dmg = 4.5;
 		}
 		return dmg;
 	}
@@ -137,6 +139,7 @@ public class Phaser extends ShootableItem {
 			return ActionResult.resultConsume(itemstack);
 		}
 	}
+	
 	/**
 	 * Get the predicate to match ammunition when searching the player's inventory, not their main/offhand
 	 * Find them in src\main\resources\data\lasertag\tags\items\laserstrahl_items:json
