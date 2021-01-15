@@ -86,7 +86,7 @@ public class Phaser extends ShootableItem {
 	 * Gets the velocity of the arrow entity 
 	 */
 	public static float getArrowVelocity() {
-		return 3.0f;
+		return 4.0f;
 	}
 
 	/**
