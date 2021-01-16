@@ -28,9 +28,11 @@ public class ModItems {
 			() -> new ArmorItem(new ModArmorMaterial("lasertag:lasertagvesttwo", 33, new int[] {0, 0, 0, 0},  0,
 					SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> {return Ingredient.fromItems(Items.IRON_INGOT);}),
 					EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
-	//Phasers    
+	//Guns 
 	public static final RegistryObject<PhaserRed> PHASERRED = ITEMS.register("phaser_red", PhaserRed::new);
 	public static final RegistryObject<PhaserBlue> PHASERBLUE = ITEMS.register("phaser_blue", PhaserBlue::new);
+	public static final RegistryObject<MgRed> MGRED = ITEMS.register("mg_red", MgRed::new);
+	public static final RegistryObject<MgBlue> MGBLUE = ITEMS.register("mg_blue", MgBlue::new);
     //Knives
 	public static final RegistryObject<SwordItem> KNIVERED = ITEMS.register("knive_red", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
 	public static final RegistryObject<SwordItem> KNIVEBLUE = ITEMS.register("knive_blue", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));

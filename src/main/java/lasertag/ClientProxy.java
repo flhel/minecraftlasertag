@@ -2,6 +2,8 @@ package lasertag;
 
 import lasertag.client.entity.render.LaserRenderBlue;
 import lasertag.client.entity.render.LaserRenderRed;
+import lasertag.item.MgBlue;
+import lasertag.item.MgRed;
 import lasertag.item.PhaserBlue;
 import lasertag.item.PhaserRed;
 import net.minecraftforge.api.distmarker.Dist;
@@ -13,5 +15,7 @@ public class ClientProxy {
 	public ClientProxy() {
 		RenderingRegistry.registerEntityRenderingHandler(PhaserRed.arrow, renderManager -> new LaserRenderRed(renderManager));
 		RenderingRegistry.registerEntityRenderingHandler(PhaserBlue.arrow, renderManager -> new LaserRenderBlue(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(MgRed.arrow, renderManager -> new LaserRenderRed(renderManager));
+		RenderingRegistry.registerEntityRenderingHandler(MgBlue.arrow, renderManager -> new LaserRenderBlue(renderManager));
 	}
 }

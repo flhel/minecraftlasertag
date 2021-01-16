@@ -1,6 +1,8 @@
 package lasertag;
 
 import lasertag.entity.ModEntityType;
+import lasertag.item.MgBlue;
+import lasertag.item.MgRed;
 import lasertag.item.ModItems;
 import lasertag.item.PhaserBlue;
 import lasertag.item.PhaserRed;
@@ -26,6 +28,8 @@ public class Main {
 	private void commonSetup(FMLCommonSetupEvent evt) {
 		PhaserRed.arrow = ModEntityType.LASERSTRAHL_ENTITY_RED.get();
 		PhaserBlue.arrow = ModEntityType.LASERSTRAHL_ENTITY_BLUE.get(); 
+		MgRed.arrow = ModEntityType.LASERSTRAHL_ENTITY_RED.get();
+		MgBlue.arrow = ModEntityType.LASERSTRAHL_ENTITY_BLUE.get(); 
 	}
 	
 	private void clientSetup(FMLClientSetupEvent evt) {
