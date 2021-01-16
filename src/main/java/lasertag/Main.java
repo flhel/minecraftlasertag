@@ -2,7 +2,8 @@ package lasertag;
 
 import lasertag.entity.ModEntityType;
 import lasertag.item.ModItems;
-import lasertag.item.Phaser;
+import lasertag.item.PhaserBlue;
+import lasertag.item.PhaserRed;
 import lasertag.sounds.ModSounds;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -23,7 +24,8 @@ public class Main {
     }	
 	 
 	private void commonSetup(FMLCommonSetupEvent evt) {
-		Phaser.arrow = ModEntityType.LASERSTRAHL_ENTITY.get(); 
+		PhaserRed.arrow = ModEntityType.LASERSTRAHL_ENTITY_RED.get();
+		PhaserBlue.arrow = ModEntityType.LASERSTRAHL_ENTITY_BLUE.get(); 
 	}
 	
 	private void clientSetup(FMLClientSetupEvent evt) {

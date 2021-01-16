@@ -10,12 +10,20 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModEntityType {
   public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, Utils.MOD_ID);
-  public static final RegistryObject<EntityType<LaserstrahlEntity>> LASERSTRAHL_ENTITY
-  = ENTITY_TYPES.register("laserstrahl_entity", () -> EntityType.Builder.<LaserstrahlEntity>create(LaserstrahlEntity::new, EntityClassification.MISC)
+  public static final RegistryObject<EntityType<LaserstrahlEntityRed>> LASERSTRAHL_ENTITY_RED
+  = ENTITY_TYPES.register("laserstrahl_entity_red", () -> EntityType.Builder.<LaserstrahlEntityRed>create(LaserstrahlEntityRed::new, EntityClassification.MISC)
 		  		.size(0.5F, 0.5F)
 		  		.setShouldReceiveVelocityUpdates(false)
 		  		.setTrackingRange(64)
 		  		.setUpdateInterval(1)
-		  		.setCustomClientFactory(LaserstrahlEntity::new)		
-		  		.build(new ResourceLocation(Utils.MOD_ID,"laserstrahl_entity").toString())); 
+		  		.setCustomClientFactory(LaserstrahlEntityRed::new)		
+		  		.build(new ResourceLocation(Utils.MOD_ID,"laserstrahl_entity_red").toString())); 
+  public static final RegistryObject<EntityType<LaserstrahlEntityBlue>> LASERSTRAHL_ENTITY_BLUE
+  = ENTITY_TYPES.register("laserstrahl_entity_blue", () -> EntityType.Builder.<LaserstrahlEntityBlue>create(LaserstrahlEntityBlue::new, EntityClassification.MISC)
+		  		.size(0.5F, 0.5F)
+		  		.setShouldReceiveVelocityUpdates(false)
+		  		.setTrackingRange(64)
+		  		.setUpdateInterval(1)
+		  		.setCustomClientFactory(LaserstrahlEntityBlue::new)		
+		  		.build(new ResourceLocation(Utils.MOD_ID,"laserstrahl_entity_blue").toString())); 
 }
