@@ -1,5 +1,18 @@
 package lasertag.item;
 
+import java.util.function.Predicate;
+
+import lasertag.Utils;
+import lasertag.entity.LaserstrahlEntityBlue;
+import lasertag.sounds.ModSounds;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.entity.projectile.AbstractArrowEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShootableItem;
@@ -13,31 +26,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.function.Predicate;
-
-import lasertag.Utils;
-import lasertag.entity.LaserstrahlEntity;
-import lasertag.sounds.ModSounds;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.item.Item;
-
-public class Phaser extends ShootableItem {
+public class PhaserBlue extends ShootableItem{
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID, "laserstrahl_item"), ForgeRegistries.ITEMS);
-	public static EntityType<LaserstrahlEntity> arrow = null;
 	
-	public Phaser() {
+	public static EntityType<LaserstrahlEntityBlue> arrow = null;
+	
+	public PhaserBlue() {
 		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(1));	
-	}
-	
-	@Override
-	public void onUse(World world, LivingEntity entityLiving, ItemStack stack, int count) {
-		//automatic fire?
 	}
 	
 	@Override
@@ -67,9 +62,9 @@ public class Phaser extends ShootableItem {
 			}
 		}
 	}
-	
+
 	public static void shoot(World world, LivingEntity entity, float power, double damage, int knockback) {
-		LaserstrahlEntity entityarrow = new LaserstrahlEntity(arrow, entity, world);
+		LaserstrahlEntityBlue entityarrow = new LaserstrahlEntityBlue(arrow, entity, world);
 		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 1.0f);
 		entityarrow.setSilent(true);
 		entityarrow.setIsCritical(false);
@@ -82,13 +77,12 @@ public class Phaser extends ShootableItem {
 		world.addEntity(entityarrow);
 	}
 
-	/**
-	 * Gets the velocity of the arrow entity 
-	 */
-	public static float getArrowVelocity() {
-		return 4.0f;
+	@Override
+	public int func_230305_d_() {
+		// TODO Auto-generated method stub
+		return 15;
 	}
-
+	
 	/**
 	 * returns the action that specifies what animation to play when the items is being used
 	 */
@@ -108,7 +102,6 @@ public class Phaser extends ShootableItem {
 	//real schaden x 1,5
 	public double calcDmg(int timeLeft) {
 		double dmg = (65 - timeLeft) * 0.1; // timeLeft abhängig von getUseDuration
-		System.out.println(dmg);
 		if (dmg < 1.5) { 
 			dmg = 1.5;
 		}
@@ -119,10 +112,13 @@ public class Phaser extends ShootableItem {
 	}
 	
 	/**
-	 * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-	 * {@link #onItemUse}.
+	 * Gets the velocity of the arrow entity 
 	 */
-
+	public static float getArrowVelocity() {
+		return 4.0f;
+	}
+	
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
@@ -145,14 +141,11 @@ public class Phaser extends ShootableItem {
 	 * Find them in src\main\resources\data\lasertag\tags\items\laserstrahl_items:json
 	 */
 
+	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		Predicate<ItemStack> LASER = (stack) -> {
-		      return stack.getItem().isIn(ItemTags.getCollection().get(new ResourceLocation(Utils.MOD_ID, "laserstrahl_items")));
-		   };   
+			return stack.getItem().isIn(ItemTags.getCollection().get(new ResourceLocation(Utils.MOD_ID, "laserstrahl_items")));
+		};   
 		return LASER;
-	}
-	
-	public int func_230305_d_() {
-	      return 15;
 	}
 }

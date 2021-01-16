@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 
 import lasertag.Utils;
 import lasertag.client.entity.model.Modelshoot;
-import lasertag.entity.LaserstrahlEntity;
+import lasertag.entity.LaserstrahlEntityRed;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -20,16 +20,16 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
-	private static final ResourceLocation texture = new ResourceLocation(Utils.MOD_ID, "textures/entity/laserstrahl_entity.png");
-	public CustomRender(EntityRendererManager renderManager) {
+public class LaserRenderRed extends EntityRenderer<LaserstrahlEntityRed> {
+	private static final ResourceLocation texture = new ResourceLocation(Utils.MOD_ID, "textures/entity/laserstrahl_entity_red.png");
+	public LaserRenderRed(EntityRendererManager renderManager) {
 		super(renderManager);
 	}
 
 	@Override
-	public void render(LaserstrahlEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
+	public void render(LaserstrahlEntityRed entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn,
 			int packedLightIn) {
-		packedLightIn = 15728800; //Laser heller rendern
+		packedLightIn = 15600000; //Laser heller rendern (Keine Dokumentation zum Wert)
 		
 		IVertexBuilder vb = bufferIn.getBuffer(RenderType.getEntityCutout(this.getEntityTexture(entityIn)));
 		matrixStackIn.push();
@@ -42,7 +42,7 @@ public class CustomRender extends EntityRenderer<LaserstrahlEntity> {
 	}
 
 	@Override
-	public ResourceLocation getEntityTexture(LaserstrahlEntity entity) {
+	public ResourceLocation getEntityTexture(LaserstrahlEntityRed entity) {
 		return texture;
 	}
 }
