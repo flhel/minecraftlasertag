@@ -88,7 +88,7 @@ public class MgBlue extends ShootableItem{
 	 */
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.BOW;
+		return UseAction.NONE;
 	}
 	
 	/*
