@@ -1,7 +1,7 @@
 package lasertag.item;
 
 import lasertag.Utils;
-import lasertag.armor.ModArmorMaterial;
+import lasertag.armor.CybertagArmor;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
@@ -19,12 +19,12 @@ public class ModItems {
 	
 	//Armor
 	public static final RegistryObject<ArmorItem> LASERTAGVESTONE = ITEMS.register("lasertagvestone",
-			() -> new ArmorItem(new ModArmorMaterial("lasertag:lasertagvestone", 33, new int[] {0, 0, 0, 0},  0,
+			() -> new ArmorItem(new CybertagArmor("lasertag:lasertagvestone", 33, new int[] {0, 0, 0, 0},  0,
 					SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> {return Ingredient.fromItems(Items.IRON_INGOT);}),
 					EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
 	
 	public static final RegistryObject<ArmorItem> LASERTAGVESTTWO = ITEMS.register("lasertagvesttwo",
-			() -> new ArmorItem(new ModArmorMaterial("lasertag:lasertagvesttwo", 33, new int[] {0, 0, 0, 0},  0,
+			() -> new ArmorItem(new CybertagArmor("lasertag:lasertagvesttwo", 33, new int[] {0, 0, 0, 0},  0,
 					SoundEvents.ITEM_ARMOR_EQUIP_GENERIC, 0.0F, () -> {return Ingredient.fromItems(Items.IRON_INGOT);}),
 					EquipmentSlotType.CHEST, new Item.Properties().group(ItemGroup.COMBAT)));
 	//Guns 

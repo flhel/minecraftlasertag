@@ -9,7 +9,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.function.Supplier;
 
-public class ModArmorMaterial implements IArmorMaterial {
+public class CybertagArmor implements IArmorMaterial {
 
 	//private static final int[] MAX_DAMAGE_ARRAY = new int[] {0, 0, 0, 0};
 	private final String name;
@@ -20,7 +20,7 @@ public class ModArmorMaterial implements IArmorMaterial {
 	private final float toughness;
 	private final Supplier<Ingredient> repairMaterial;
 	
-	public ModArmorMaterial(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairMaterial) {
+	public CybertagArmor(String name, int maxDamageFactor, int[] damageReductionAmountArray, int enchantability, SoundEvent soundEvent, float toughness, Supplier<Ingredient> repairMaterial) {
 		this.name = name;
 		//this.maxDamageFactor = maxDamageFactor;
 		//this.damageReductionAmountArray = damageReductionAmountArray;
