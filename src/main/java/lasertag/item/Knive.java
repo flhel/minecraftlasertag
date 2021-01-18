@@ -6,18 +6,13 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum Knive implements IItemTier {
-	KNIVEENUM(1, 131, 4.0F, 3.0F, 5, () -> {return Ingredient.fromItems(Items.IRON_INGOT);});
-
+	KNIVE(1, 131, 4.0F, 3.0F, 5, () -> {return Ingredient.fromItems(Items.IRON_INGOT);});
+	
 	private final Supplier<Ingredient> repairmaterial;
-
 	private final int enchantability;
-
 	private final float attackDamage;
-
 	private final float efficiency;
-
 	private final int maxUses;
-
 	private final int harvestLevel;
 
 	Knive(int harvestLevel, int maxUses, float efficiency, float attackDamage, int enchantability, Supplier<Ingredient> repairmaterial) {
