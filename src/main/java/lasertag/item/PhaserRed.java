@@ -104,6 +104,4 @@ public class PhaserRed extends ShootableItem{
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		return PhaserHelper.getInventoryAmmoPredicate();
 	}
-	
-	
 }
