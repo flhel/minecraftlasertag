@@ -1,6 +1,0 @@
-{
-    "parent": "item/phaser",
-    "textures": {
-        "layer0": "lasertag:item/phaser_pulling_0"
-    }
-}

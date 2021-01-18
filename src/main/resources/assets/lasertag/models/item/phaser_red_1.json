@@ -1,0 +1,6 @@
+{
+    "parent": "lasertag:item/phaser_red",
+    "textures": {
+        "layer0": "lasertag:item/phaser_red_1"
+    }
+}
