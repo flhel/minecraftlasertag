@@ -4,14 +4,17 @@ import java.util.function.Predicate;
 
 import lasertag.Utils;
 import lasertag.entity.LaserstrahlEntityBlue;
+import net.minecraft.client.world.ClientWorld;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShootableItem;
 import net.minecraft.item.UseAction;
@@ -24,11 +27,25 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class PhaserBlue extends ShootableItem{
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID, "laserstrahl_item"), ForgeRegistries.ITEMS);
-	
 	public static EntityType<LaserstrahlEntityBlue> arrow = null;
+	private boolean startcharge = false;
+	private short ticks = 0;
+	
+	//RegistryObject.of(new ResourceLocation(Utils.MOD_ID, "phaser_blue"), ForgeRegistries.ITEMS).get()
 	
 	public PhaserBlue() {
 		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(1));	
+		ItemModelsProperties.registerProperty(this, new ResourceLocation("lasertag:power"), new IItemPropertyGetter() {
+			@Override
+			public float call(ItemStack stack, ClientWorld world, LivingEntity entity) {
+				if (startcharge && ticks < Short.MAX_VALUE) {
+					ticks++;
+				} else {
+					ticks = 0;
+				}
+				return (float) ticks / 500;
+			}
+		});
 	}
 	
 
@@ -49,6 +66,7 @@ public class PhaserBlue extends ShootableItem{
 					PhaserHelper.playSound(world, entityLiving);
 					PhaserHelper.damageItem(entity, itemstack);
 					PhaserHelper.ammoLogic(playerentity, itemstack, stack);
+					startcharge = false;
 				}
 			}
 		}
@@ -84,6 +102,8 @@ public class PhaserBlue extends ShootableItem{
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
+		ticks = 0;
+		startcharge = true;
 		return PhaserHelper.onItemRightClick(worldIn, playerIn, handIn);
 	}
 	

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 @Mod(Utils.MOD_ID)
 public class Main {
-	
+
 	public Main() {
         ModItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
         ModSounds.SOUNDS.register(FMLJavaModLoadingContext.get().getModEventBus());
@@ -34,14 +34,6 @@ public class Main {
 	
 	private void clientSetup(FMLClientSetupEvent evt) {
 		new ClientProxy();
-		/*
-		ItemModelsProperties.registerProperty(new Phaser(), new ResourceLocation("lasertag:pull"), new IItemPropertyGetter() {
-		    @Override
-		    public float call(ItemStack stack, @Nullable ClientWorld world, @Nullable LivingEntity entity) {
-		      return (float)getPowerLevel(stack) / (float)getMaxPower(stack); // Some external methods
-		    }
-		  }
-		 */
 	}
 	
 	private void serverSetup(FMLDedicatedServerSetupEvent evt) {
