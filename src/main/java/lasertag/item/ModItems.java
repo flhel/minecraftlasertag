@@ -7,6 +7,7 @@ import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.item.SwordItem;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.SoundEvents;
 import net.minecraftforge.fml.RegistryObject;
@@ -33,8 +34,8 @@ public class ModItems {
 	public static final RegistryObject<MgRed> MGRED = ITEMS.register("mg_red", MgRed::new);
 	public static final RegistryObject<MgBlue> MGBLUE = ITEMS.register("mg_blue", MgBlue::new);
     //Knives
-	//public static final RegistryObject<SwordItem> KNIVERED = ITEMS.register("lasertag:knive_red", () -> new SwordItem(Knive.KNIVE, 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
-	//public static final RegistryObject<SwordItem> KNIVEBLUE = ITEMS.register("lasertag:knive_blue", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
+	public static final RegistryObject<SwordItem> KNIVERED = ITEMS.register("knive_red", () -> new SwordItem(Knive.KNIVE, 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
+	public static final RegistryObject<SwordItem> KNIVEBLUE = ITEMS.register("knive_blue", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
 	//Ammo
 	public static final RegistryObject<LaserstrahlItem> LASERSTRAHL_ITEM = ITEMS.register("laserstrahl_item", LaserstrahlItem::new);
 	//Potions
