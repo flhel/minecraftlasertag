@@ -28,19 +28,19 @@
     "overrides": [
         {
             "predicate": {
-                "power": 0.3
+                "lasertag:power": 0.3
             },
             "model": "lasertag:item/phaser_red_0"
         },
         {
             "predicate": {
-                "power": 0.6
+                "lasertag:power": 0.6
             },
             "model": "lasertag:item/phaser_red_1"
         },
         {
             "predicate": {
-                "power": 0.9
+                "lasertag:power": 0.9
             },
             "model": "lasertag:item/phaser_red_2"
         }
