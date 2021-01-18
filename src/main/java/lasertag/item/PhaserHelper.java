@@ -19,6 +19,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
+/*
+ * Zentralisiert alle Methoden für Phaser/Mg 
+ */
 public class PhaserHelper {	
 	public static ItemStack onPlayerStoppedUsingInit(ItemStack stack, World world, LivingEntity entityLiving, int timeLeft) {
 		if (entityLiving instanceof PlayerEntity) {
