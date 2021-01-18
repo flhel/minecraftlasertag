@@ -91,11 +91,10 @@ public class PhaserHelper {
 	public static int getUseDurationPhaser(ItemStack itemstack) {
 		return 50;
 	}
+	
 	public static int getUseDurationMg(ItemStack itemstack) {
 		return 1000000;
 	}
-
-
 
 	/**
 	 * Gets the velocity of the arrow entity 
