@@ -72,7 +72,7 @@ public class LaserstrahlEntityBlue extends AbstractArrowEntity {
 			LivingEntity livingentity = (LivingEntity)entity;
 			if (!this.world.isRemote && this.getPierceLevel() <= 0) {
 				/* 
-				 * Will get increased bei +1 by default because Lasers are only modded Arrows
+				 * ArrowCountInEntity will get increased by +1 as a default because Lasers are only modded Arrows
 				 * Setting the count -1 will fix the bug where Arrows appear when hitting Enemys
 				 */
 				livingentity.setArrowCountInEntity(livingentity.getArrowCountInEntity() - 1);

@@ -121,6 +121,11 @@ public class PhaserBlue extends ShootableItem{
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		
+		if(handIn != Hand.MAIN_HAND) {
+			return ActionResult.resultFail(itemstack);
+		}
+		
 		boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
 		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);
@@ -141,7 +146,6 @@ public class PhaserBlue extends ShootableItem{
 	 * Find them in src\main\resources\data\lasertag\tags\items\laserstrahl_items:json
 	 */
 
-	@Override
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		Predicate<ItemStack> LASER = (stack) -> {
 			return stack.getItem().isIn(ItemTags.getCollection().get(new ResourceLocation(Utils.MOD_ID, "laserstrahl_items")));

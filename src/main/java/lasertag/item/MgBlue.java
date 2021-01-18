@@ -46,7 +46,7 @@ public class MgBlue extends ShootableItem{
 
 				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
 					if (!world.isRemote) {
-						shoot(world, entity, getArrowVelocity(), 1, 0);
+						shoot(world, entity, getArrowVelocity(), 1.5f, 0);
 					}
 					
 					world.playSound((PlayerEntity) null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(), ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);
@@ -88,7 +88,7 @@ public class MgBlue extends ShootableItem{
 	 */
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		return UseAction.NONE;
+		return UseAction.BOW;
 	}
 	
 	/*
@@ -96,7 +96,7 @@ public class MgBlue extends ShootableItem{
 	 */
 	@Override
 	public int getUseDuration(ItemStack itemstack) {
-		return 50;
+		return 10000000;
 	}
 	
 	/**
@@ -109,6 +109,11 @@ public class MgBlue extends ShootableItem{
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
+		
+		if(handIn != Hand.MAIN_HAND) {
+			return ActionResult.resultFail(itemstack);
+		}
+		
 		boolean flag = !playerIn.findAmmo(itemstack).isEmpty();
 
 		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, flag);

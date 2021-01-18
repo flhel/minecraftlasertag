@@ -34,8 +34,8 @@ public class ModItems {
 	public static final RegistryObject<MgRed> MGRED = ITEMS.register("mg_red", MgRed::new);
 	public static final RegistryObject<MgBlue> MGBLUE = ITEMS.register("mg_blue", MgBlue::new);
     //Knives
-	public static final RegistryObject<SwordItem> KNIVERED = ITEMS.register("knive_red", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
-	public static final RegistryObject<SwordItem> KNIVEBLUE = ITEMS.register("knive_blue", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
+	//public static final RegistryObject<SwordItem> KNIVERED = ITEMS.register("knive_red", () -> new SwordItem(Knive.KNIVE , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
+	//public static final RegistryObject<SwordItem> KNIVEBLUE = ITEMS.register("knive_blue", () -> new SwordItem(Knive.KNIVEENUM , 4, 1.0f, new Item.Properties().group(ItemGroup.COMBAT)));
 	//Ammo
 	public static final RegistryObject<LaserstrahlItem> LASERSTRAHL_ITEM = ITEMS.register("laserstrahl_item", LaserstrahlItem::new );
 }
