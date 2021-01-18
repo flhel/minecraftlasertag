@@ -24,34 +24,6 @@ public enum Knive implements IItemTier {
 		this.repairmaterial = repairmaterial;
 	}
 
-	public int func_200926_a() {
-		return this.maxUses;
-	}
-
-	public float func_200928_b() {
-		return this.efficiency;
-	}
-
-
-	public float func_200929_c() {
-		return this.attackDamage;
-	}
-
-
-	public int func_200925_d() {
-		return this.harvestLevel;
-	}
-
-
-	public int func_200927_e() {
-		return this.enchantability;
-	}
-
-
-	public Ingredient func_200924_f() {
-		return this.repairmaterial.get();
-	}
-
 	@Override
 	public int getMaxUses() {
 		return this.maxUses;
