@@ -49,8 +49,11 @@ public class PhaserHelper {
 		world.addEntity(entityarrow);
 	}
 	
-	//real schaden x 1,5
-	public static double calcDmg(int timeLeft) {
+	/* Paser Schadenskalukulation
+	 * RealSchaden getPhaserDmgx 1,5 , getMgDmg x 1,5
+	 * Mgs haben fixe Werte
+	 */
+	public static double getPhaserDmg(int timeLeft) {
 		double dmg = (65 - timeLeft) * 0.1; // timeLeft abhängig von getUseDuration
 		if (dmg < 2) { 
 			dmg = 2;
@@ -59,6 +62,10 @@ public class PhaserHelper {
 			dmg = 4.5;
 		}
 		return dmg;
+	}
+	
+	public static double getMgDmg() {
+		return 1.5f;
 	}
 
 	public static int func_230305_d_() {
@@ -75,8 +82,11 @@ public class PhaserHelper {
 	/*
 	 * UseDuration
 	 */
-	public static int getUseDuration(ItemStack itemstack) {
+	public static int getUseDurationPhaser(ItemStack itemstack) {
 		return 50;
+	}
+	public static int getUseDurationMg(ItemStack itemstack) {
+		return 1000000;
 	}
 
 

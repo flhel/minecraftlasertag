@@ -43,7 +43,7 @@ public class MgRed extends ShootableItem{
 				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
 					if (!world.isRemote) {
 						LaserstrahlEntityRed entityarrow = new LaserstrahlEntityRed(arrow, entity, world);
-						PhaserHelper.shoot(world, entity, getArrowVelocity(), 1.5f, 0, entityarrow);
+						PhaserHelper.shoot(world, entity, getArrowVelocity(), PhaserHelper.getMgDmg(), 0, entityarrow);
 					}
 					PhaserHelper.playSound(world, entityLiving);
 					PhaserHelper.damageItem(entity, itemstack);
@@ -71,7 +71,7 @@ public class MgRed extends ShootableItem{
 	 */
 	@Override
 	public int getUseDuration(ItemStack itemstack) {
-		return 10000000;
+		return PhaserHelper.getUseDurationMg(itemstack);
 	}
 
 	/**
