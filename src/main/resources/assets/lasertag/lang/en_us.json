@@ -1,6 +1,12 @@
 {
-"item.lasertag.lasertagvestone": "Lasertag Team 1",
-"item.lasertag.lasertagvesttwo": "Lasertag Team 2",
-"item.lasertag.phaser":"Phaser",
-"item.lasertag.laserstrahl_item": "Laserkristall"
+"item.lasertag.lasertagvestone": "Lasertag Team Guards",
+"item.lasertag.lasertagvesttwo": "Lasertag Team Punks",
+"item.lasertag.phaser_blue":"Phaser",
+"item.lasertag.phaser_red":"Phaser",
+"item.lasertag.laserstrahl_item": "Laserkristall",
+"item.lasertag.knive_blue": "Knife",
+"item.lasertag.knive_red":"Knife",
+"item.lasertag.cyanid":"Blue Pill",
+"item.lasertag.mg_blue":"MG-Phaser",
+"item.lasertag.mg_red":"MG-Phaser"
 }
