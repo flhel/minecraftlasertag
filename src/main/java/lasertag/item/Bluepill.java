@@ -15,9 +15,9 @@ import net.minecraft.util.DrinkHelper;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
-public class Cyanid extends Item {
+public class Bluepill extends Item {
 
-	public Cyanid(Properties builder) {
+	public Bluepill(Properties builder) {
 		super(builder);
 		// TODO Auto-generated constructor stub
 	}

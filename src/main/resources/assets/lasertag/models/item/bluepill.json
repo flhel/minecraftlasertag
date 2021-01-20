@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "lasertag:item/cyanid"
+    "layer0": "lasertag:item/bluepill"
   }
 }

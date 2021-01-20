@@ -56,5 +56,5 @@ public class ModItems {
 	//Ammo
 	public static final RegistryObject<LaserstrahlItem> LASERSTRAHL_ITEM = ITEMS.register("laserstrahl_item", LaserstrahlItem::new);
 	//Potions
-	public static final RegistryObject<Cyanid> CYANID = ITEMS.register("cyanid", () -> new Cyanid(new Item.Properties().group(ItemGroup.BREWING)));
+	public static final RegistryObject<Bluepill> BLUEPILL = ITEMS.register("bluepill", () -> new Bluepill(new Item.Properties().group(ItemGroup.BREWING)));
 }
