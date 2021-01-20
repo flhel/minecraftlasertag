@@ -96,8 +96,12 @@ public class PhaserHelper {
 	/**
 	 * Gets the velocity of the arrow entity 
 	 */
-	public static float getArrowVelocity() {
-		return 4.0f;
+	public static float getPhaserVelocity() {
+		return 5.0f;
+	}
+	
+	public static float getMgVelocity() {
+		return 4.2f;
 	}
 
 	public static ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {

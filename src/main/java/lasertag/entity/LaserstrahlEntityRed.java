@@ -12,6 +12,7 @@ import net.minecraft.network.IPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
@@ -79,5 +80,11 @@ public class LaserstrahlEntityRed extends AbstractArrowEntity {
 			}
 		}
 	}
+	
+	@Override
+	protected void func_230299_a_(BlockRayTraceResult p_230299_1_) {
+		//Soll momentan nichts tun außer die Methode leer zu überschreiben
+	}
+
 }
 
