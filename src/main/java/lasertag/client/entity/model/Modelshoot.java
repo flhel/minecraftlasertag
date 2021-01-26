@@ -16,7 +16,7 @@ public class Modelshoot extends EntityModel<Entity> {
 		textureWidth = 16;
 		textureHeight = 16;
 		bb_main = new ModelRenderer(this);
-		bb_main.setRotationPoint(0.0F, 24.0F, 0.0F);
+		bb_main.setRotationPoint(-0.5F, -10.0F, 2.2F);
 		bb_main.setTextureOffset(0, 0).addBox(0.0F, -6.0F, 2.5F, 1.0F, 6.0F, 1.0F, 0.0F, false);
 	}
 
@@ -27,7 +27,6 @@ public class Modelshoot extends EntityModel<Entity> {
 
 	@Override
 	public void render(MatrixStack matrixStack, IVertexBuilder buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		//packedLight = 15600000; //Laser heller rendern (Keine Dokumentation zum Wert)
 		bb_main.render(matrixStack, buffer, packedLight, packedOverlay);
 	}
 
