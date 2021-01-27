@@ -13,12 +13,12 @@ public class ModRegisterAnimation {
 		ItemModelsProperties.registerProperty(phaser, new ResourceLocation("lasertag:power"), new IItemPropertyGetter() {
 			@Override
 			public float call(ItemStack stack, ClientWorld world, LivingEntity entity) {
-				if (PhaserRed.startCharge && PhaserRed.ticks < Short.MAX_VALUE) {
-					PhaserRed.ticks++;
+				if (phaser.startCharge && phaser.ticks < Short.MAX_VALUE) {
+					phaser.ticks++;
 				} else {
-					PhaserRed.ticks = 0;
+					phaser.ticks = 0;
 				}
-				return (float) PhaserRed.ticks / 500;
+				return (float) phaser.ticks / 500;
 			}
 		});
 	}

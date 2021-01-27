@@ -6,6 +6,7 @@ import lasertag.Utils;
 import lasertag.entity.LaserstrahlEntityBlue;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -46,7 +47,7 @@ public class PhaserBlue extends ShootableItem{
 				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
 					if (!world.isRemote) {
 						LaserstrahlEntityBlue entityarrow = new LaserstrahlEntityBlue(arrow, entity, world);
-						PhaserHelper.shoot(world, entity, PhaserHelper.getPhaserVelocity(), PhaserHelper.getPhaserDmg(timeLeft), 0, entityarrow);	
+						PhaserHelper.shoot(world, entity, entityarrow, PhaserHelper.getPhaserVelocity(), PhaserHelper.getPhaserDmg(timeLeft), PhaserHelper.getPhaserInaccuracy(timeLeft));
 					}
 					PhaserHelper.playSound(world, entityLiving);
 					PhaserHelper.damageItem(entity, itemstack);
@@ -87,7 +88,9 @@ public class PhaserBlue extends ShootableItem{
 			ticks = 0;
 			startCharge = true;
 		}
-		
+		if (playerIn.findAmmo(playerIn.getHeldItem(handIn)).isEmpty()) {
+			startCharge = false;
+		}
 		return PhaserHelper.onItemRightClick(world, playerIn, handIn);
 	}
 	
@@ -97,5 +100,12 @@ public class PhaserBlue extends ShootableItem{
 	 */
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		return PhaserHelper.getInventoryAmmoPredicate();
+	}
+	
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if(!isSelected) {
+			//setzt Ladeanimation bei Item wechsel zurrück
+			startCharge = false;
+		}
 	}
 }

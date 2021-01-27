@@ -56,7 +56,6 @@ public class LaserstrahlEntityRed extends AbstractArrowEntity {
 	
 	@Override
 	public void tick() {
-		this.arrowShake = 0;
 		super.tick();
 		if (this.inGround || this.inWater) {
 			this.remove();

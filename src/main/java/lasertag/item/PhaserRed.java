@@ -6,6 +6,7 @@ import lasertag.Utils;
 import lasertag.entity.LaserstrahlEntityRed;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,8 +27,8 @@ public class PhaserRed extends ShootableItem{
 	public static final RegistryObject<Item> LASERSTRAHL_ITEM = RegistryObject.of(new ResourceLocation(Utils.MOD_ID, "laserstrahl_item"), ForgeRegistries.ITEMS);	
 	public static EntityType<LaserstrahlEntityRed> arrow = null;
 	public boolean animationRegistered = false;
-	public static boolean startCharge = false;
-	public static short ticks = 0;
+	public boolean startCharge = false;
+	public short ticks = 0;
 	
 	public PhaserRed() {
 		super(new Properties().group(ItemGroup.COMBAT).maxStackSize(1));
@@ -46,7 +47,7 @@ public class PhaserRed extends ShootableItem{
 				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
 					if (!world.isRemote) {
 						LaserstrahlEntityRed entityarrow = new LaserstrahlEntityRed(arrow, entity, world);
-						PhaserHelper.shoot(world, entity, PhaserHelper.getPhaserVelocity(), PhaserHelper.getPhaserDmg(timeLeft), 0, entityarrow);
+						PhaserHelper.shoot(world, entity, entityarrow, PhaserHelper.getPhaserVelocity(), PhaserHelper.getPhaserDmg(timeLeft), PhaserHelper.getPhaserInaccuracy(timeLeft));
 					}
 					PhaserHelper.playSound(world, entityLiving);
 					PhaserHelper.damageItem(entity, itemstack);
@@ -87,6 +88,9 @@ public class PhaserRed extends ShootableItem{
 			ticks = 0;
 			startCharge = true;
 		}
+		if (playerIn.findAmmo(playerIn.getHeldItem(handIn)).isEmpty()) {
+			startCharge = false;
+		}
 		return PhaserHelper.onItemRightClick(world, playerIn, handIn);
 	}
 
@@ -96,5 +100,12 @@ public class PhaserRed extends ShootableItem{
 	 */
 	public Predicate<ItemStack> getInventoryAmmoPredicate() {
 		return PhaserHelper.getInventoryAmmoPredicate();
+	}
+	
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		if(!isSelected) {
+			//setzt Ladeanimation bei Item wechsel zurrück
+			startCharge = false;
+		}
 	}
 }

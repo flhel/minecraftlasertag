@@ -43,7 +43,7 @@ public class MgBlue extends ShootableItem{
 				if (!itemstack.isEmpty() || playerentity.abilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
 					if (!world.isRemote) {
 						LaserstrahlEntityBlue entityarrow = new LaserstrahlEntityBlue(arrow, entity, world);
-						PhaserHelper.shoot(world, entity, PhaserHelper.getMgVelocity(), PhaserHelper.getMgDmg(), 0, entityarrow);
+						PhaserHelper.shoot(world, entity, entityarrow, PhaserHelper.getMgVelocity(), PhaserHelper.getMgDmg(), PhaserHelper.getMgInaccuracy());
 					}
 					PhaserHelper.playSound(world, entityLiving);
 					PhaserHelper.damageItem(entity, itemstack);

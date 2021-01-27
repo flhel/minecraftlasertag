@@ -39,16 +39,19 @@ public class PhaserHelper {
 		return null;
 	}
 	
-	public static void shoot(World world, LivingEntity entity, float power, double damage, int knockback, AbstractArrowEntity entityarrow) {
-		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, power , 1.0f);
+	public static void shoot(World world, LivingEntity entity, AbstractArrowEntity entityarrow, float velocity, double damage, float inaccuracy) {
+		entityarrow.shoot(entity.getLookVec().x, entity.getLookVec().y, entity.getLookVec().z, velocity , inaccuracy);
 		entityarrow.setSilent(true);
-		entityarrow.setIsCritical(false);
-		entityarrow.setDamage(damage);
-		entityarrow.setKnockbackStrength(knockback);
-		entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, power , 1.0f); 
 		entityarrow.setNoGravity(true);
+		entityarrow.setIsCritical(false);
+		entityarrow.setKnockbackStrength(0);
+		entityarrow.setDamage(damage);
+		
 		entityarrow.arrowShake = 0;
 		entityarrow.pickupStatus = AbstractArrowEntity.PickupStatus.DISALLOWED;
+		
+		//entityarrow.func_234612_a_(entity, entity.rotationPitch, entity.rotationYaw, 0.0F, velocity , 1.0f);  //?? nicht dokumentiert wird aber von Bow benutzt
+		
 		world.addEntity(entityarrow);
 	}
 	
@@ -68,7 +71,7 @@ public class PhaserHelper {
 	}
 	
 	public static double getMgDmg() {
-		return 1.5f;
+		return 2.0f;
 	}
 
 	public static int func_230305_d_() {
@@ -95,18 +98,31 @@ public class PhaserHelper {
 
 	/**
 	 * Gets the velocity of the arrow entity 
+	 * over 4.5 sometimes gets rendered weird
 	 */
 	public static float getPhaserVelocity() {
-		return 5.0f;
+		return 5.5f;
 	}
 	
 	public static float getMgVelocity() {
-		return 4.2f;
+		return 4.5f;
+	}
+	
+	public static float getPhaserInaccuracy(int timeLeft) {
+		if (timeLeft <= 25) {
+			return 0.0f;
+		}
+		return 0.6f;
+	}
+	
+	public static float getMgInaccuracy() {
+		return 1.0f;
 	}
 
 	public static ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
-
+		
+		// nur in Rechter Hand benutzbar
 		if(handIn != Hand.MAIN_HAND) {
 			return ActionResult.resultFail(itemstack);
 		}
