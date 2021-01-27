@@ -156,7 +156,7 @@ public class PhaserHelper {
 
 	public static void playSound(World world, LivingEntity entityLiving) {
 		world.playSound((PlayerEntity) null, entityLiving.getPosX(), entityLiving.getPosY(), entityLiving.getPosZ(), 
-				ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 1.0f, 1.0f);	
+				ModSounds.PHASER_SOUND.get(), SoundCategory.PLAYERS, 0.8f, 1.0f);	
 	}
 
 	public static void damageItem(ServerPlayerEntity entity, ItemStack itemstack) {
