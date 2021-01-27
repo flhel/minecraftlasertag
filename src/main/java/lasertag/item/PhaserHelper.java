@@ -71,7 +71,7 @@ public class PhaserHelper {
 	}
 	
 	public static double getMgDmg() {
-		return 2.0f;
+		return 2.0;
 	}
 
 	public static int func_230305_d_() {

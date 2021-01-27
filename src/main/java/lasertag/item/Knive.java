@@ -6,7 +6,7 @@ import net.minecraft.item.crafting.Ingredient;
 import java.util.function.Supplier;
 
 public enum Knive implements IItemTier {
-	KNIVE(1, 131, 4.0F, 3.0F, 5, () -> {return Ingredient.fromItems(Items.IRON_INGOT);});
+	KNIVE(1, 131, 4.0F, 7.0F, 5, () -> {return Ingredient.fromItems(Items.IRON_INGOT);});
 	
 	private final Supplier<Ingredient> repairmaterial;
 	private final int enchantability;

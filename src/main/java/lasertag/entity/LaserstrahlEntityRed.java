@@ -46,7 +46,7 @@ public class LaserstrahlEntityRed extends AbstractArrowEntity {
 	
 	@Override //.ENTITY_ARROW_HIT
 	protected SoundEvent getHitEntitySound() {
-		return SoundEvents.BLOCK_ANVIL_HIT;
+		return SoundEvents.BLOCK_LAVA_EXTINGUISH;
 	}
 	
 	@Override
