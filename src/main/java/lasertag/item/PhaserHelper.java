@@ -101,7 +101,7 @@ public class PhaserHelper {
 	 * over 4.5 sometimes gets rendered weird
 	 */
 	public static float getPhaserVelocity() {
-		return 5.5f;
+		return 4.5f;
 	}
 	
 	public static float getMgVelocity() {
