@@ -30,7 +30,7 @@ logoFile="cybertag.png" #optional
 credits="Thanks for this mod goes to Florian, Frederic, Lena and Oliver" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This is an Cyberpunk themed mod for Minecraft 1.16.3
+This is an Cyberpunk themed mod for Minecraft 1.16.x
 
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
@@ -49,6 +49,6 @@ This is an Cyberpunk themed mod for Minecraft 1.16.3
 [[dependencies.lasertag]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.16.3]"
+    versionRange="[1.16,]"
     ordering="NONE"
     side="BOTH"
